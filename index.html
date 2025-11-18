@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Lora', serif;
+    background: #f5f5f5;
+}
+header {
+    background: #2c7ad6;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+#logo {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+#logo span {
+    color: #f5a623;
+}
+nav {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+nav a:hover {
+    background: #f5a623;
+}
+section {
+    height: 90vh;
+    width: 100%;
+    background-image: url('libraryhomeimg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+.quote {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    animation: fadeIn 2s ease-in-out;
+}
+.quote p {
+    font-size: 2em;
+    margin: 0;
+}
+.quote p.author {
+    font-size: 1.5em;
+    margin-top: 10px;
+    font-style: italic;
+}
+#events, #contact {
+    padding: 40px 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    border-radius: 10px;
+}
+#events h2, #contact h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #2c7ad6;
+}
+#events ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2em;
+}
+#events ul li {
+    background: #f5f5f5;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+#events ul li:hover {
+    background: #e0e0e0;
+}
+#contact form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#contact form input, #contact form textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+#contact form input[type="submit"] {
+    background-color: #2c7ad6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#contact form input[type="submit"]:hover {
+    background-color: #f5a623;
+}
+footer {
+    background: #2c7ad6;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+</style>
+</head>
+<body>
+    <header>
+        <div id="logo">CMR LIBRARY<span>ZONE</span></div>
+        <nav>
+            <a href="index.html" class="fa fa-home"> Home</a>
+            <a href="gallery.html" class="fa fa-image"> Gallery</a>
+            <a href="adminlogin.html" class="fa fa-user"> Admin Login</a>
+            <a href="studentlogin.html" class="fa fa-user">Student Login</a>
+            <a href="employlogin.html" class="fa fa-user">Employ Login</a>
+            <a href="about.html" class="fa fa-user"> About</a>
+        </nav>
+    </header>
+    <section>
+        <div class="quote">
+            <p>"A room without books is like a body without a soul."</p>
+            <p class="author">- Marcus Tullius Cicero</p>
+        </div>
+    </section>
+  
+   
+    <footer>
+        &copy; 2024 CMR Library Zone. All rights reserved.
+    </footer>
+</body>
+</html>

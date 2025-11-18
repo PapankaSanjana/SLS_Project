@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Zone - Departments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f9;
+        }
+        header {
+            display: flex;
+            flex-direction: row;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #logo {
+            height: 65px;
+            width: 30%;
+            text-align: center;
+            line-height: 65px;
+            font-size: 40px;
+            color: white;
+        }
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 70%;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 18px;
+            transition: color 0.3s, background 0.3s;
+        }
+        nav a:hover {
+            background: #575757;
+            border-radius: 5px;
+        }
+        section {
+            height: 100vh;
+            width: 100%;
+            background-image: url('image.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        select {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2c7ad6;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        select:hover {
+            background-color: #1f5bb5;
+            transform: scale(1.05);
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2c7ad6;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #1f5bb5;
+            transform: scale(1.05);
+        }
+        #search-book-form, #all-books-table {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #2c7ad6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #2c7ad6;
+            color: white;
+        }
+        td {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) td {
+            background-color: #e6f7ff;
+        }
+        tr:hover td {
+            background-color: #d0eaff;
+        }
+        #no-books-found, #global-no-books-found {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo">LIBRARY<b style="color:#2c7ad6;">ZONE</b></div>
+        <nav>
+            <a href="index.html" class="fa fa-home"> Home</a>
+            <a href="gallery.html" class="fa fa-image"> Gallery</a>
+            <a href="adminlogin.html" class="fa fa-user"> Admin Login</a>
+            <a href="studentlogin.html" class="fa fa-user"> Login</a>
+            <a href="employlogin.html" class="fa fa-user">Employ Login</a>
+            <a href="about.html" class="fa fa-info-circle"> About</a>
+        </nav>
+    </header>
+    <section>
+        <select id="department-select" onchange="showSearchBookForm()">
+            <option value="">Select Department</option>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="it">IT</option>
+            <option value="csm">CSM</option>
+            <option value="csd">CSD</option>
+            <option value="eee">EEE</option>
+            <option value="aiml">AIML</option>
+        </select>
+
+        <button onclick="listAllBooks()">List All Books</button>
+        
+        <div id="search-book-form">
+            <input type="text" id="search-input" placeholder="Search Book" oninput="searchBook()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author Name</th>
+                        <th>Location</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="search-results"></tbody>
+            </table>
+            <div id="no-books-found">Book not found</div>
+        </div>
+
+        <div id="global-search-form">
+            <input type="text" id="global-search-input" placeholder="Search Books" oninput="globalSearchBook()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author Name</th>
+                        <th>Location</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="global-search-results"></tbody>
+            </table>
+            <div id="global-no-books-found">Book not found</div>
+        </div>
+
+        <div id="all-books-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author Name</th>
+                        <th>Department</th>
+                        <th>Location</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="all-books-results"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init('QpfSPbBi5sTbZiBqR'); // Replace with your EmailJS user ID
+        })();
+
+        function showSearchBookForm() {
+            const department = document.getElementById('department-select').value;
+            if (department) {
+                document.getElementById('search-book-form').style.display = 'block';
+                document.getElementById('global-search-form').style.display = 'none';
+                document.getElementById('all-books-table').style.display = 'none';
+                searchBook();
+            } else {
+                document.getElementById('search-book-form').style.display = 'none';
+                document.getElementById('global-search-form').style.display = 'block';
+                document.getElementById('all-books-table').style.display = 'none';
+            }
+        }
+
+        function searchBook() {
+            const department = document.getElementById('department-select').value;
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const searchResults = document.getElementById('search-results');
+            const noBooksFound = document.getElementById('no-books-found');
+            searchResults.innerHTML = '';
+            const departmentBooks = JSON.parse(localStorage.getItem(department)) || [];
+            const filteredBooks = departmentBooks.filter(book => book.name.toLowerCase().includes(query));
+            if (filteredBooks.length === 0) {
+                noBooksFound.style.display = 'block';
+            } else {
+                noBooksFound.style.display = 'none';
+                filteredBooks.forEach(book => {
+                    const row = `<tr>
+                        <td>${book.name}</td>
+                        <td>${book.author}</td>
+                        <td>${book.location}</td>
+                        <td>${book.quantity}</td>
+                        <td><button onclick="borrowBook('${book.name}')">Borrow</button></td>
+                    </tr>`;
+                    searchResults.innerHTML += row;
+                });
+            }
+        }
+
+        function globalSearchBook() {
+            const query = document.getElementById('global-search-input').value.toLowerCase();
+            const globalSearchResults = document.getElementById('global-search-results');
+            const globalNoBooksFound = document.getElementById('global-no-books-found');
+            globalSearchResults.innerHTML = '';
+            const departments = ["cse", "ece", "it", "csm", "csd", "eee", "aiml"];
+            let allBooks = [];
+            departments.forEach(department => {
+                const departmentBooks = JSON.parse(localStorage.getItem(department)) || [];
+                allBooks = allBooks.concat(departmentBooks);
+            });
+            const filteredBooks = allBooks.filter(book => book.name.toLowerCase().includes(query));
+            if (filteredBooks.length === 0) {
+                globalNoBooksFound.style.display = 'block';
+            } else {
+                globalNoBooksFound.style.display = 'none';
+                filteredBooks.forEach(book => {
+                    const row = `<tr>
+                        <td>${book.name}</td>
+                        <td>${book.author}</td>
+                        <td>${book.location}</td>
+                        <td>${book.quantity}</td>
+                        <td><button onclick="borrowBook('${book.name}')">Borrow</button></td>
+                    </tr>`;
+                    globalSearchResults.innerHTML += row;
+                });
+            }
+        }
+
+        function listAllBooks() {
+            const allBooksResults = document.getElementById('all-books-results');
+            allBooksResults.innerHTML = '';
+            const departments = ["cse", "ece", "it", "csm", "csd", "eee", "aiml"];
+            departments.forEach(department => {
+                const departmentBooks = JSON.parse(localStorage.getItem(department)) || [];
+                departmentBooks.forEach(book => {
+                    const row = `<tr>
+                        <td>${book.name}</td>
+                        <td>${book.author}</td>
+                        <td>${department}</td>
+                        <td>${book.location}</td>
+                        <td>${book.quantity}</td>
+                    </tr>`;
+                    allBooksResults.innerHTML += row;
+                });
+            });
+            document.getElementById('search-book-form').style.display = 'none';
+            document.getElementById('global-search-form').style.display = 'none';
+            document.getElementById('all-books-table').style.display = 'block';
+        }
+
+        function borrowBook(bookName) {
+            const departments = ["cse", "ece", "it", "csm", "csd", "eee", "aiml"];
+            let bookFound = false;
+
+            departments.forEach(department => {
+                let departmentBooks = JSON.parse(localStorage.getItem(department)) || [];
+                let bookIndex = departmentBooks.findIndex(book => book.name === bookName);
+                if (bookIndex !== -1 && !bookFound) {
+                    if (departmentBooks[bookIndex].quantity > 0) {
+                        // Book is available, decrease quantity
+                        departmentBooks[bookIndex].quantity--;
+                        localStorage.setItem(department, JSON.stringify(departmentBooks));
+                        bookFound = true;
+
+                        // Update the displayed quantity immediately
+                        const rows = document.querySelectorAll('tbody tr');
+                        rows.forEach(row => {
+                            if (row.cells[0].innerText === bookName) {
+                                row.cells[3].innerText = departmentBooks[bookIndex].quantity;
+                            }
+                        });
+
+                        // Send email to admin using EmailJS
+                        sendEmailToAdmin(bookName);
+
+                        alert(`You have borrowed the book "${bookName}" successfully.`);
+                    } else {
+                        // Book is out of stock
+                        alert(`Sorry, the book "${bookName}" is out of stock.`);
+                    }
+                }
+            });
+
+            if (!bookFound) {
+                alert(`The book "${bookName}" is not available.`);
+            }
+        }
+
+        function sendEmailToAdmin(bookName) {
+            const templateParams = {
+                book_name: bookName
+            };
+
+            emailjs.send('service_sop0rvp', 'template_lk506a9', templateParams)
+                .then(function(response) {
+                    console.log('Email sent to admin:', response);
+                }, function(error) {
+                    console.error('Error sending email:', error);
+                });
+        }
+    </script>
+</body>
+</html>

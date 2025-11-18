@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+#logo {
+    height: 65px;
+    width: 40%;
+    background: white;
+    text-align: center;
+    line-height: 65px;
+    font-size: 40px;
+    float: left;
+}
+header {
+    display: flex;
+    flex-direction: row;
+}
+#logo {
+    width: 30%;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 70%;
+}
+section {
+    width: 100%;
+    background-size: cover;
+    padding: 20px;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; /* Add a little space between the images */
+}
+.gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Fit images while maintaining their aspect ratio */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.gallery img:hover {
+    transform: scale(1.05);
+}
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+.lightbox-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+}
+.lightbox img {
+    width: 100%;
+    height: auto;
+}
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+    <header>
+        <div id="logo">LIBRARY<b style="color:#2c7ad6;">ZONE</b></div>
+        <nav>
+            <a href="index.html" class="fa fa-home" style="text-decoration:none; color: black;">Home</a>
+            <a href="gallery.html" class="fa fa-image" style="text-decoration:none; color: black;">Gallery</a>
+            <a href="adminlogin.html" class="fa fa-user" style="text-decoration:none; color: black;">Admin Login</a>
+            <a href="studentlogin.html" class="fa fa-user" style="text-decoration:none; color: black;">Login</a>
+            <a href="employlogin.html" class="fa fa-user" style="text-decoration:none; color: black;">Employ Login</a>
+            <a href="about.html" class="fa fa-user" style="text-decoration:none; color: black;">About</a>
+        </nav>
+    </header>
+    <section id="gallery" class="gallery">
+        <img src="image.png" alt="Library Image 1">
+        <img src="image.png" alt="Library Image 2">
+        <img src="image.png" alt="Library Image 3">
+        <img src="librarygallery3.webp" alt="Library Image 4">
+        <img src="libararygallery2.webp" alt="Library Image 5">
+        <img src="librarygallery.jpg" alt="Library Image 6">
+        <img src="image.png" alt="Library Image 7">
+        <img src="image.png" alt="Library Image 8">
+        <img src="image.png" alt="Library Image 9">
+        <img src="librarygallery3.webp" alt="Library Image 10">
+        <img src="libararygallery2.webp" alt="Library Image 11">
+        <img src="librarygallery.jpg" alt="Library Image 12">
+        <img src="image.png" alt="Library Image 1">
+        <img src="image.png" alt="Library Image 2">
+        <img src="image.png" alt="Library Image 3">
+        <img src="librarygallery3.webp" alt="Library Image 4">
+        <img src="libararygallery2.webp" alt="Library Image 5">
+        <img src="librarygallery.jpg" alt="Library Image 6">
+        <img src="image.png" alt="Library Image 7">
+        <img src="image.png" alt="Library Image 8">
+        <img src="image.png" alt="Library Image 9">
+        <img src="librarygallery3.webp" alt="Library Image 10">
+        <img src="libararygallery2.webp" alt="Library Image 11">
+        <img src="librarygallery.jpg" alt="Library Image 12">
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="">
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = document.querySelectorAll('.gallery img');
+        const closeBtn = document.querySelector('.close');
+
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImg.src = img.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
